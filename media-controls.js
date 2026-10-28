@@ -1,0 +1,9 @@
+(() => {
+ let soundEnabled=false;
+ const videos=[...document.querySelectorAll('[data-interactive-video]')];
+ const buttons=[...document.querySelectorAll('.sound-toggle')];
+ function renderSound(){buttons.forEach(button=>{button.setAttribute('aria-pressed',String(soundEnabled));button.setAttribute('aria-label',soundEnabled?'Mute sound':'Enable sound');button.classList.toggle('is-audible',soundEnabled);button.querySelector('span').textContent=soundEnabled?'Sound on':'Sound off';});videos.forEach(video=>video.muted=!soundEnabled);}
+ buttons.forEach(button=>button.addEventListener('click',()=>{soundEnabled=!soundEnabled;renderSound();const video=button.closest('.reel,.hero').querySelector('video');if(soundEnabled&&video.paused){delete video.dataset.userPaused;video.play().catch(()=>{});}}));renderSound();
+ const time=value=>{const s=Math.max(0,Math.floor(Number.isFinite(value)?value:0));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');};
+ document.querySelectorAll('.reel').forEach(reel=>{const video=reel.querySelector('video'),seek=reel.querySelector('input[type=range]'),clock=reel.querySelector('.film-time');if(!seek)return;const update=()=>{const duration=Number.isFinite(video.duration)?video.duration:0;seek.value=duration?video.currentTime/duration*100:0;seek.disabled=!duration;seek.setAttribute('aria-valuetext',time(video.currentTime)+' of '+time(duration));if(clock)clock.textContent=time(video.currentTime)+' / '+time(duration);};video.addEventListener('timeupdate',update);video.addEventListener('loadedmetadata',update);seek.addEventListener('input',()=>{if(Number.isFinite(video.duration))video.currentTime=Number(seek.value)/100*video.duration;});update();});
+})();

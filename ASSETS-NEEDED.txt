@@ -1,0 +1,5 @@
+CONNECTED: jinna vibe.mp4 as hero and four Work films: Jinna Reels, LOX Vibe 2, LOX Vibe 1, LOX Short Film.
+NOT FOUND in supplied folder: 28 HAZİRAN - SHORT.mp4; 04 AUG - LOX - ATAKAN.mp4. These are omitted from Work until supplied.
+Other files in supplied folder are not used.
+About image images/1.PNG added. Original home HTML is still needed if exact reconstruction is required.
+About statistics retained from user-provided HTML; confirm before launch.
